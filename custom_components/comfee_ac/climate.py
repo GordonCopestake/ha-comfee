@@ -82,6 +82,8 @@ class ComfeeClimate(CoordinatorEntity[ComfeeCoordinator], ClimateEntity):
             | ClimateEntityFeature.FAN_MODE
             | ClimateEntityFeature.SWING_MODE
             | ClimateEntityFeature.PRESET_MODE
+            | ClimateEntityFeature.TURN_ON
+            | ClimateEntityFeature.TURN_OFF
         )
 
     @property

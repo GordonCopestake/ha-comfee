@@ -165,6 +165,8 @@ class ComfeeCoordinator(DataUpdateCoordinator[DeviceState]):
             raise HomeAssistantError("Authentication with AC failed") from err
         except TimeoutError as err:
             raise HomeAssistantError("Timed out applying AC state") from err
+        except OSError as err:
+            raise HomeAssistantError(f"Could not reach AC: {err}") from err
 
     async def async_set_display(self, enabled: bool) -> None:
         """Set the AC display by toggling it when needed."""

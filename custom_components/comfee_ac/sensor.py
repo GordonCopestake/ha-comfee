@@ -2,13 +2,15 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
-from typing import Any, Callable
+from typing import Any
 
 from homeassistant.components.sensor import SensorDeviceClass, SensorEntity, SensorEntityDescription, SensorStateClass
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_NAME, PERCENTAGE, UnitOfTemperature
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity import EntityCategory
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
@@ -27,6 +29,7 @@ SENSORS = [
     ComfeeSensorDescription(
         key="status",
         translation_key="status",
+        entity_category=EntityCategory.DIAGNOSTIC,
         value_fn=lambda values: "on" if values.get("power") else "off",
     ),
     ComfeeSensorDescription(
@@ -56,16 +59,19 @@ SENSORS = [
     ComfeeSensorDescription(
         key="mode",
         translation_key="mode",
+        entity_category=EntityCategory.DIAGNOSTIC,
         value_fn=lambda values: enum_name(values.get("mode")),
     ),
     ComfeeSensorDescription(
         key="fan_speed",
         translation_key="fan_speed",
+        entity_category=EntityCategory.DIAGNOSTIC,
         value_fn=lambda values: enum_name(values.get("fan_speed")),
     ),
     ComfeeSensorDescription(
         key="error_code",
         translation_key="error_code",
+        entity_category=EntityCategory.DIAGNOSTIC,
         value_fn=lambda values: values.get("error_code"),
     ),
 ]

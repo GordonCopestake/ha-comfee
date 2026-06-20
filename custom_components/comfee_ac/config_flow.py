@@ -41,15 +41,14 @@ class ComfeeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         if user_input is not None:
             host = user_input[CONF_HOST]
-            await self.async_set_unique_id(host)
-            self._abort_if_unique_id_configured()
-
             token = user_input.get(CONF_TOKEN, "").strip()
             key = user_input.get(CONF_KEY, "").strip()
             device_id = user_input.get(CONF_DEVICE_ID)
 
             try:
                 if token and key and device_id:
+                    await self.async_set_unique_id(str(device_id))
+                    self._abort_if_unique_id_configured()
                     data = {
                         CONF_NAME: user_input.get(CONF_NAME) or DEFAULT_NAME,
                         CONF_HOST: host,
@@ -70,6 +69,8 @@ class ComfeeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 if not isinstance(device, AirConditioner):
                     errors["base"] = "not_supported"
                 else:
+                    await self.async_set_unique_id(str(device.id))
+                    self._abort_if_unique_id_configured()
                     name = user_input.get(CONF_NAME) or device.name or DEFAULT_NAME
                     data = {
                         CONF_NAME: name,
@@ -94,7 +95,7 @@ class ComfeeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         schema = vol.Schema(
             {
-                vol.Required(CONF_HOST, default="192.168.0.26"): str,
+                vol.Required(CONF_HOST): str,
                 vol.Optional(CONF_NAME, default=DEFAULT_NAME): str,
                 vol.Optional(CONF_PORT, default=DEFAULT_PORT): int,
                 vol.Optional(CONF_DEVICE_ID): int,
