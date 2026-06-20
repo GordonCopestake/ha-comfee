@@ -1,0 +1,51 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Comfee AC",
+        "description": "Configure a Comfee/Midea-compatible air conditioner. Use device id/token/key for fully local setup, or provide account details to discover them.",
+        "data": {
+          "host": "Host",
+          "name": "Name",
+          "port": "Port",
+          "device_id": "Device ID",
+          "token": "Token",
+          "key": "Key",
+          "region": "Region",
+          "username": "Cloud username",
+          "password": "Cloud password"
+        }
+      }
+    },
+    "error": {
+      "auth": "Authentication failed",
+      "cannot_connect": "Could not connect",
+      "not_supported": "The discovered device is not a supported air conditioner"
+    }
+  },
+  "entity": {
+    "sensor": {
+      "status": {
+        "name": "Status"
+      },
+      "indoor_temperature": {
+        "name": "Indoor temperature"
+      },
+      "target_temperature": {
+        "name": "Target temperature"
+      },
+      "indoor_humidity": {
+        "name": "Indoor humidity"
+      },
+      "mode": {
+        "name": "Mode"
+      },
+      "fan_speed": {
+        "name": "Fan speed"
+      },
+      "error_code": {
+        "name": "Error code"
+      }
+    }
+  }
+}

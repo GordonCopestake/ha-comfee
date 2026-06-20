@@ -1,0 +1,10 @@
+{
+  "domain": "comfee_ac",
+  "name": "Comfee AC",
+  "codeowners": [],
+  "config_flow": true,
+  "documentation": "https://github.com/",
+  "iot_class": "local_polling",
+  "requirements": ["msmart-ng==2026.4.1"],
+  "version": "0.1.0"
+}
